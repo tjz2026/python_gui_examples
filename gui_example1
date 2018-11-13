@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Nov 13 18:03:13 2018
+
+@author: jiuzhou
+"""
+
+from tkinter import *
+
+master = Tk()
+master.title("Lingli Tang's Cost calculator")
+
+Label(master, text="Food:").grid(row=0)
+Label(master, text="Bus:").grid(row=1)
+Label(master, text="Cloth:").grid(row=2)
+
+Label(master, text="Shopping Items:").grid(row=4)
+Label(master, text="Amount of Cost:").grid(row=3)
+
+e1 = Entry(master)
+e1.grid(row=0, column=1)
+
+e2 = Entry(master)
+e2.grid(row=1, column=1)
+
+e3 = Entry(master)
+e3.grid(row=2, column=1)
+
+K = Entry(master, state=DISABLED)
+K.grid(row=3, column=1)
+Cn = Entry(master, state=DISABLED)
+Cn.grid(row=4, column=1)
+
+def calc(K, Cn):
+    # get the user input as floats
+    food = float(e1.get())
+    Bus = float(e2.get())
+    Cloth = float(e3.get())
+    # < put your input validation here >
+
+    #Amount of Cost:
+    K.configure(state=NORMAL) # make the field editable
+    K.delete(0, 'end') # remove old content
+    K.insert(0, str( food + Bus + Cloth)) # write new content
+    K.configure(state=DISABLED) # make the field read only
+
+    #Final Debt Amount:
+    Cn.configure(state=NORMAL) # make the field editable
+    Cn.delete(0, 'end') # remove old content
+    Cn.insert(0, str('3')) # write new content
+    Cn.configure(state=DISABLED) # make the field read only
+
+
+Button(master, text='Quit', command=master.quit).grid(row=5, column=0, sticky=E, pady=4)
+Button(master, text='Show', command=lambda: calc(K, Cn)).grid(row=5, column=1, sticky=W, pady=4)
+
+mainloop()
